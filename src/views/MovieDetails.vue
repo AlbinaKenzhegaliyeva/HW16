@@ -35,11 +35,6 @@ export default (await import('vue')).defineComponent({
     }
   },
   components: { Header },
-  methods: {
-    getShortList() {
-      return this.movieDetails.actorList.slice(0, 3)
-    }
-  },
   mounted() {
     console.log(router)
 
