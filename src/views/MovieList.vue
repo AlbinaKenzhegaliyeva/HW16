@@ -1,30 +1,33 @@
 <template>
   <main>
-    <h1>Top 20 out of 250</h1>
-    <div v-for="(movie, index) in movies" :key="index">
-      <p @click="goToMovie(movie.id)">{{ movie.title }}</p>
+    <Header />
+    <div v-for="searchMoive in searchMoives" :key="searchMoive.id" class="searchMovie">
+      <p>{{ searchMoive.title }}</p>
     </div>
-    <br /><br />
+    <div class="top20">
+      <div class="search">
+        <button @click="goToSearch">Go to search a movie</button>
+      </div>
+      <h2>Top 20</h2>
+      <div v-for="(movie, index) in movies" :key="index" class="movie">
+        <p @click="goToMovie(movie.id)">{{ movie.title }}</p>
+      </div>
+    </div>
     <div class="movieList">
-      <div class="movieList_raiting">
-        <div v-for="(result, index) in results" :key="index">
+      <div>
+        <div v-for="(result, index) in results" :key="index" class="movieList_raiting">
           <p>{{ result.title }}</p>
         </div>
+        <br />
         <button @click="getRating">Show rating 9+</button>
       </div>
-      <div class="movieList_year">
-        <div v-for="(year, index) in years" :key="index">
+      <div>
+        <div v-for="(year, index) in years" :key="index" class="movieList_year">
           <p>{{ year.title }}</p>
         </div>
+        <br />
         <button @click="getYear">Show 2000's movies</button>
       </div>
-      <div>
-        <button @click="goToSearch">Search movie</button>
-      </div>
-    </div>
-    <div v-for="searchMoive in searchMoives" :key="searchMoive.id">
-      <p>{{ searchMoive.title }}</p>
-      <!-- <img v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path" width="100px" /> -->
     </div>
   </main>
 </template>
@@ -32,10 +35,13 @@
 <script>
 import axios from 'axios'
 import router from '@/router'
+import Header from '../components/Header.vue'
+
 
 export default (await import('vue')).defineComponent({
   name: 'MovieList',
-  props: ["searchMoives"],
+  components: { Header},
+  props: ['searchMoives'],
   mounted() {
     this.getMovies()
   },
@@ -49,7 +55,7 @@ export default (await import('vue')).defineComponent({
   methods: {
     getMovies() {
       axios
-        .get('https://imdb-api.com/en/API/Top250Movies/k_w802a7tr')
+        .get('https://imdb-api.com/en/API/Top250Movies/k_fy8lbsmd')
         .then((res) => {
           console.log(res.data.items.slice(0, 20))
           this.movies = res.data.items.slice(0, 20)
@@ -84,14 +90,43 @@ export default (await import('vue')).defineComponent({
 <style>
 h1 {
   color: red;
-  padding-bottom: 20px;
+  padding: 5px 0 5px 0;
 }
-#film {
-  width: 250px;
-  height: 250px;
+h2 {
+  color: blueviolet;
+  padding: 0 0 20px 20px;
+}
+p {
+  font-size: 15px;
+  font-weight: bold;
+}
+.top20 {
+  background-color: rgb(179, 156, 200);
+}
+.movie {
+  padding: 20px 0 20px 20px;
 }
 .movieList {
   display: flex;
   gap: 250px;
+  padding: 0 0 10px 250px;
+  background-color: lightpink;
+}
+.movieList_raiting {
+  padding-top: 50px;
+}
+.search {
+  padding: 30px 0 20px 600px;
+}
+button {
+  width: 100px;
+  border: 3px solid palevioletred;
+  border-radius: 15px;
+  background-color: plum;
+  font-size: 14px;
+}
+.searchMovie {
+  background-color: rgb(179, 156, 200);
+  padding: 20px 0 20px 20px;
 }
 </style>

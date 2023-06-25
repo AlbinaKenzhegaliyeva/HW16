@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>SEARCH</h1>
+    <h3>SEARCH</h3>
     <input type="text" v-model="query" @keyup="getResult(query)" />
     <MovieList :searchMoives="searchMoives" />
   </div>
@@ -23,7 +23,7 @@ export default (await import('vue')).defineComponent({
   methods: {
     getResult(query) {
       axios
-        .get(`https://imdb-api.com/en/API/SearchMovie/k_w802a7tr/${query}`)
+        .get(`https://imdb-api.com/en/API/SearchMovie/k_fy8lbsmd/${query}`)
         .then((res) => {
           this.searchMoives = res.data.results
           console.log(this.searchMoives)
@@ -35,3 +35,15 @@ export default (await import('vue')).defineComponent({
   }
 })
 </script>
+
+<style>
+h3 {
+  margin-left: 600px;
+  color: red;
+}
+input {
+  margin: 0 0 50px 600px;
+  border-radius: 10px;
+  padding: 3px;
+}
+</style>
