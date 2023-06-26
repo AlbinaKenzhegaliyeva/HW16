@@ -13,8 +13,13 @@
       <div v-for="(actor, index) in this.actors" :key="index">
         <div class="cast">
           <img id="actor" :src="actor.image" />
-          <p>{{ actor.name }} as character {{actor.asCharacter}}</p>
+          <p>{{ actor.name }} as character {{ actor.asCharacter }}</p>
         </div>
+      </div>
+      <p>WATCH ALSO:</p>
+      <div v-for="(similar, index) in this.movieDetails.similars" :key="index" class="title">
+        <img :src="similar.image" id="poster" />
+        <p>{{ similar.title }}</p>
       </div>
     </div>
   </div>
@@ -39,7 +44,7 @@ export default (await import('vue')).defineComponent({
     console.log(router)
 
     axios
-      .get(`https://imdb-api.com/en/API/Title/k_fy8lbsmd/${this.$route.params.id}`)
+      .get(`https://imdb-api.com/en/API/Title/k_w802a7tr/${this.$route.params.id}`)
       .then((res) => {
         this.movieDetails = res.data
         this.actors = res.data.actorList.slice(0, 3)
@@ -72,5 +77,14 @@ export default (await import('vue')).defineComponent({
   flex-direction: row;
   gap: 50px;
   padding: 30px 30px 30px 300px;
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  padding: 30px 30px 30px 300px;
+}
+p {
+  font-size: 18px;
 }
 </style>

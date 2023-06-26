@@ -37,10 +37,9 @@ import axios from 'axios'
 import router from '@/router'
 import Header from '../components/Header.vue'
 
-
 export default (await import('vue')).defineComponent({
   name: 'MovieList',
-  components: { Header},
+  components: { Header },
   props: ['searchMoives'],
   mounted() {
     this.getMovies()
@@ -55,7 +54,7 @@ export default (await import('vue')).defineComponent({
   methods: {
     getMovies() {
       axios
-        .get('https://imdb-api.com/en/API/Top250Movies/k_fy8lbsmd')
+        .get('https://imdb-api.com/en/API/Top250Movies/k_w802a7tr')
         .then((res) => {
           console.log(res.data.items.slice(0, 20))
           this.movies = res.data.items.slice(0, 20)

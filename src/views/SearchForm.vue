@@ -23,7 +23,7 @@ export default (await import('vue')).defineComponent({
   methods: {
     getResult(query) {
       axios
-        .get(`https://imdb-api.com/en/API/SearchMovie/k_fy8lbsmd/${query}`)
+        .get(`https://imdb-api.com/en/API/SearchMovie/k_w802a7tr/${query}`)
         .then((res) => {
           this.searchMoives = res.data.results
           console.log(this.searchMoives)
